@@ -24,14 +24,13 @@ public:
             root->isTerminal=true;
             return;
         }
-        int index=word[0]-'a';
         TrieNode* child;
-        if(root->children[index]!=NULL){
-            child=root->children[index];
+        if(root->children[word[0]-'a']!=NULL){
+            child=root->children[word[0]-'a'];
         }
         else{
             child=new TrieNode(word[0]);
-            root->children[index]=child;
+            root->children[word[0]-'a']=child;
         }
         insertUtil(child,word.substr(1));
     }
@@ -43,10 +42,9 @@ public:
         if(word.length()==0){
             return root->isTerminal;
         }
-        int index=word[0]-'a';
         TrieNode* child;
-        if(root->children[index]!=NULL){
-            child=root->children[index];
+        if(root->children[word[0]-'a']!=NULL){
+            child=root->children[word[0]-'a'];
         }
         else{
             return false;
@@ -61,10 +59,9 @@ public:
         if(word.length()==0){
             return true;
         }
-        int index=word[0]-'a';
         TrieNode* child;
-        if(root->children[index]!=NULL){
-            child=root->children[index];
+        if(root->children[word[0]-'a']!=NULL){
+            child=root->children[word[0]-'a'];
         }
         else{
             return false;

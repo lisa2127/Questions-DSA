@@ -7,82 +7,45 @@ using namespace std;
  // } Driver Code Ends
 class Solution
 {
-   
-    public:
-
+   public:
     //Function to insert heap.
-
-    priority_queue<int> left;
-
-    priority_queue<int, vector<int>, greater<int> > right;
-
-   
-
-    void insertHeap(int &x){
-
-        if(right.size()==0) right.push(x);
-
-        else if(left.size()==0) left.push(x);
-
-        else{
-
-            if(left.top()<x) right.push(x);
-
-            else left.push(x);
-
-        }
-
-    }
-
-   
-
-    //Function to balance heaps.
-
-    void balanceHeaps(){
-
-        while(left.size()+1 < right.size()){
-
-            left.push(right.top());
-
-            right.pop();
-
-        }
-
-        while(left.size() > right.size()){
-
-            right.push(left.top());
-
-            left.pop();
-
-        }
-
-    }
-
-   
-
-    //Function to return Median.
-
-    double getMedian(){
-
-        balanceHeaps();
-
-        double ans=0;
-
-        if(left.size()+right.size()==0) return ans;
-
-        if( (left.size()+right.size()) % 2 == 0)
-
-            ans = ((left.top()*1.0)+(right.top()*1.0))/2;
-
+    priority_queue<int> maxHeap; //creating a maxHeap
+    priority_queue<int, vector<int>, greater<int>> minHeap; //creating a min Heap
+    void insertHeap(int &x)
+    {
+        if(maxHeap.size() == 0 || maxHeap.top() >= x)
+            maxHeap.push(x);
         else
-
-            ans = right.top();
-
-        return ans;
-
+            minHeap.push(x);
+            
+        balanceHeaps();
+        
     }
-
-
+    
+    //Function to balance heaps.
+    void balanceHeaps()
+    {
+        if(maxHeap.size() > minHeap.size() + 1){
+            minHeap.push(maxHeap.top());
+            maxHeap.pop();
+        }
+        
+        else if(minHeap.size() > maxHeap.size()){
+            maxHeap.push(minHeap.top());
+            minHeap.pop();
+        }
+        
+        
+    }
+    
+    //Function to return Median.
+    double getMedian()
+    {
+        if(maxHeap.size() == minHeap.size())
+            return ((double)maxHeap.top() + (double)minHeap.top()) / 2.0;
+            
+        return (double)maxHeap.top();
+    }
 };
 
 

@@ -37,13 +37,13 @@ public:
         }
         
         if(pre==NULL){
-            head = prev;
+            head = prev;           //if previous part does not exist
         }
         else{
             pre->next = prev;
         }
         
-        tail->next = curr;        // connect the tail 
+        tail->next = curr;       
         
         return head;
     }

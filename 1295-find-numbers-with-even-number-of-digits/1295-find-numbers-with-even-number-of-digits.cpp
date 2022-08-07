@@ -17,10 +17,20 @@ public:
         }   
         return ans;*/
         //Approach-2
-        int ans=0;
+       /*int ans=0;
         for(int i=0;i<nums.size();i++){
             string s=to_string(nums[i]);
             if(s.length()%2==0){
+                ans++;
+            }
+        }
+        return ans;*/
+        
+        //Approach-3
+        int ans=0;
+        for(int i=0;i<nums.size();i++){
+            int l=log10(nums[i]);
+            if((l+1)%2==0){
                 ans++;
             }
         }

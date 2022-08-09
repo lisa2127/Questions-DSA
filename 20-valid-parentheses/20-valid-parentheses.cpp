@@ -7,25 +7,28 @@ public:
             if(ch=='(' || ch=='{' || ch=='['){
                 st.push(ch);
             }
-            else if(ch==')' || ch=='}' || ch==']'){
-                if(st.empty()){
-                    return false;
-                }
-                
-                else if((ch==')' && st.top()!='(' ) ||(ch=='}' && st.top()!='{') ||(ch==']' && st.top()!='[')){
-                    return false;
+            else{
+                if(!st.empty()){
+                    char top=st.top();
+                    if((ch==')' && top=='(' ) ||(ch=='}' && top=='{') 
+                       ||(ch==']' && top=='[')){
+                        st.pop();
+                    }
+                    else{
+                        return false;
+                    }
                 }
                 else{
-                    st.pop();
+                    return false;
                 }
             }
         }
-        if(st.empty()){
-            return true;
+            if(st.empty()){
+                return true;
+            }
+            else{
+                return false;
+            }
         }
-        else{
-            return false;
-        }
-        
-    }
+            
 }; 

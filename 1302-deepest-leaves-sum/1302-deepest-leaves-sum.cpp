@@ -14,19 +14,18 @@ public:
  
     int deepestLeavesSum(TreeNode* root) {
         int sum=0;
-        vector<vector<int>> ans;
         if(root==NULL){
             return 0;
         }
         queue<TreeNode*> q;
         q.push(root);
         while(!q.empty()){
-            vector<int> v;
+            sum=0;
             int size=q.size();
             for(int i=0;i<size;i++){
                 TreeNode* temp=q.front();
                 q.pop();
-                v.push_back(temp->val);
+                sum+=temp->val;
               
                 if(temp->left){
                     q.push(temp->left);
@@ -35,12 +34,9 @@ public:
                     q.push(temp->right);
                 }
             }
-            ans.push_back(v);
+           
         }
-        int i=ans.size()-1;
-        for(int j=0;j<ans[i].size();j++){
-                sum+=ans[i][j];
-        }
+      
         return sum;
     }
 };

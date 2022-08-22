@@ -11,7 +11,7 @@
  */
 class Solution {
 public:
-    void inorder(TreeNode* root,vector<int> &ans){
+    /*void inorder(TreeNode* root,vector<int> &ans){
         if(root==NULL){
             return;
         }
@@ -26,5 +26,28 @@ public:
         vector<int> ans;
         inorder(root,ans);
         return ans[k-1];
+    }*/
+    void kth(TreeNode* root,int &cnt,int k,int &ans){
+         if(root==NULL){
+            return;
+        }
+        kth(root->left,cnt,k,ans);
+        cnt++;
+        if(cnt==k){
+            ans=root->val;
+        }
+        kth(root->right,cnt,k,ans);
+    }
+    int kthSmallest(TreeNode* root, int k) {
+        if(root==NULL){
+            return 0;
+        }
+        if(root->left==NULL && k==1){
+            return root->val;
+        }
+        int ans=0;
+        int cnt=0;
+        kth(root,cnt,k,ans);
+        return ans;
     }
 };

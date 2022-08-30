@@ -1,7 +1,8 @@
 class Solution {
 public:
     int findJudge(int n, vector<vector<int>>& trust) {
-        unordered_map<int,set<int>> adj;
+        //Approach -1
+        /*unordered_map<int,set<int>> adj;
         for(int i=0;i<trust.size();i++){
             int u=trust[i][0];
             int v=trust[i][1];
@@ -25,6 +26,22 @@ public:
                 return -1;
             }
         }
-        return judge;
+        return judge;*/
+        //Approach-2
+        if(n==1 && trust.empty()){
+            return 1;
+        }
+        vector<int> ind(n+1,0);
+        vector<int> outd(n+1,0);
+        for(auto i:trust){
+            ind[i[1]]++;
+            outd[i[0]]++;
+        }
+        for(int i=0;i<=n;i++){
+            if(outd[i]==0 && ind[i]==n-1){
+                return i;
+            }
+        }
+        return -1;
     }
 };

@@ -11,7 +11,7 @@
  */
 class Solution {
 public:
-    bool isCrt(vector<int> temp,int k){
+    /*bool isCrt(vector<int> temp,int k){
         for(int i=0;i<temp.size();i++){
             if(temp[i]>k){
                 return false;
@@ -31,6 +31,19 @@ public:
         }
         temp.pop_back();
         
+    }*/
+    
+        void solve(TreeNode* root,int curr,int &cnt){
+        if(root==NULL){
+            return;
+        }
+        if(root->val >= curr){
+            cnt++;
+
+        }
+        solve(root->left,max(curr,root->val),cnt);
+        solve(root->right,max(curr,root->val),cnt);
+            
     }
 
     int goodNodes(TreeNode* root) {
@@ -38,8 +51,8 @@ public:
             return 0;
         }
         int cnt=0;
-        vector<int> ans;
-        solve(root,ans,cnt);
+        //vector<int> ans;
+        solve(root,INT_MIN,cnt);
         return cnt;
     }
 };

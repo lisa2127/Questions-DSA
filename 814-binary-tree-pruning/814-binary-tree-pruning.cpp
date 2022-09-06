@@ -23,11 +23,30 @@ public:
         return root;
         
     }
+    
+    TreeNode* solve2(TreeNode* root){
+        if(root==NULL){
+            return NULL;
+        }
+        if(root->left==NULL && root->right==NULL && root->val==0){
+            return NULL;
+        }
+        if(root->left==NULL && root->right==NULL && root->val==1){
+            return root;
+        }
+        root->left=solve2(root->left);
+        root->right=solve2(root->right);
+        if(root->left!=NULL || root->right!=NULL || root->val==1){
+            return root;
+        }
+        return NULL;
+        
+    }
     TreeNode* pruneTree(TreeNode* root) {
         if(root==NULL){
             return NULL;
         }
-        return solve(root);
+        return solve2(root);
         
     }
 };

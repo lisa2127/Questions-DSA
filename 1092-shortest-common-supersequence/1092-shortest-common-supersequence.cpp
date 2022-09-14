@@ -1,6 +1,6 @@
 class Solution {
 public:
-    string shortestCommonSupersequence(string str1, string str2) {
+  string shortestCommonSupersequence(string str1, string str2) {
         
         //step 1 to get shortest supersequence
         int m=str1.size();

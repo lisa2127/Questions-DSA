@@ -1,31 +1,20 @@
 class Solution {
 public:
-    bool isIsomorphic(string s, string t) {
-        
+    bool solve(string s,string t){
         unordered_map<char,char> mp;
-        for(int i=0;i<s.length();i++){
-            mp[s[i]]=t[i];
+        for(int i=0;i<s.size();i++){
+            if(mp.find(s[i])!=mp.end()){
+                if(mp[s[i]]!=t[i]){
+                    return false;
+                }
+            }
+            else{
+                mp[s[i]]=t[i];
+            }
         }
-        
-        vector<int> arr;
-        for(auto i:mp){
-            arr.push_back(i.second);
-        }
-        int n=arr.size();
-        sort(arr.begin(),arr.end());
-        arr.erase(unique(arr.begin(),arr.end()),arr.end());
-        int m=arr.size();
-        if(n!=m){
-            return false;
-        }
-        for(int i=0;i<s.length();i++){
-            s[i]=mp[s[i]];
-        }
-        if(s.compare(t)==0){
-            return true;
-        }
-        else{
-            return false;
-        }
+        return true;
+    }
+    bool isIsomorphic(string s, string t) {
+        return solve(s,t) && solve(t,s);
     }
 };

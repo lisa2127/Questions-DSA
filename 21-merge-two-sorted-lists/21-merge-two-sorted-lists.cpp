@@ -10,34 +10,6 @@
  */
 class Solution {
 public:
-    ListNode* merge(ListNode* first,ListNode* second){
-        if(first->next==NULL){
-            first->next=second;
-            return first;
-        }
-        ListNode* curr1=first;
-        ListNode* next1=curr1->next;
-        ListNode* curr2=second;
-   
-        while(curr1!=NULL && curr2!=NULL){
-            if(curr2->val <= next1->val && curr1->val <= curr2->val ){
-               ListNode* next2=curr2->next;
-               curr1->next=curr2;
-               curr2->next=next1;
-               curr1=curr2;
-               curr2=next2;
-            }
-            else{
-                curr1=next1;
-                next1=next1->next;
-                if(next1==NULL){
-                    curr1->next=curr2;
-                    return first;
-                }
-            }
-        }
-        return first;
-    }
     ListNode* mergeTwoLists(ListNode* list1, ListNode* list2) {
         if(list1==NULL && list2==NULL){
             return NULL;
@@ -45,16 +17,34 @@ public:
         if(list1==NULL){
             return list2;
         }
-        if(list2==NULL){
+        if(list1==NULL){
             return list1;
         }
-        
-        if(list1->val < list2->val){
-            return merge(list1,list2);
+        ListNode* curr1=list1;
+        ListNode* curr2=list2;
+        ListNode* temp=new ListNode(-1);
+        ListNode* ans=temp;
+        while(curr1!=NULL && curr2!=NULL){
+            if(curr1->val<=curr2->val){
+                temp->next=curr1;
+                curr1=curr1->next;
+            }
+            else{
+                temp->next=curr2;
+                curr2=curr2->next;
+            }
+            temp=temp->next;
         }
-        else{
-            return merge(list2,list1);
+        while(curr1!=NULL){
+            temp->next=curr1;
+            temp=temp->next;
+            curr1=curr1->next;
         }
-        
+        while(curr2!=NULL){
+            temp->next=curr2;
+            temp=temp->next;
+            curr2=curr2->next;
+        }
+        return ans->next;
     }
 };

@@ -10,16 +10,14 @@ public:
         return ans;
     }
     int countDistinctIntegers(vector<int>& nums) {
-        unordered_map<int,int> mp;
+        unordered_set<int> s;
         for(int i=0;i<nums.size();i++){
-            mp[nums[i]]++;
-        }
-        for(int i=0;i<nums.size();i++){
+            s.insert(nums[i]);
             int temp=reverse(nums[i]);
-            if(mp.find(temp)==mp.end()){
-                mp[temp]++;
+            if(s.find(temp)==s.end()){
+                s.insert(temp);
             }
         }
-        return mp.size();
+        return s.size();
     }
 };
